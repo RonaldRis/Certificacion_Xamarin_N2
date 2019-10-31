@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EscuelaAPP.Views.NewItemPage"
+             Title="">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding Title}" Command="{Binding GuardarActualizarCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Padding="15">
+            <Label Text="Si no agrega una nota, automaticamente se asignara como 0"/>
+            <ActivityIndicator IsEnabled="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+            <Label Text="Nota 1:" FontSize="Medium" />
+            <Entry Text="{Binding nota1}" FontSize="Small" Keyboard="Numeric" MaxLength="5"/>
+            <Label Text="Nota 2:" FontSize="Medium" />
+            <Entry Text="{Binding nota2}" FontSize="Small" Keyboard="Numeric" MaxLength="5"/>
+            <Label Text="Nota 3:" FontSize="Medium" />
+            <Entry Text="{Binding nota3}" FontSize="Small" Keyboard="Numeric" MaxLength="5"/>
+
+            <Button Text="Eliminar" Command="{Binding EliminarCommand}" HorizontalOptions="Center"
+                    IsVisible="{Binding isPut}"
+                    BackgroundColor="LightCoral"
+                    TextColor="Black"
+                    BorderColor="Black"
+                    BorderRadius="15"
+                    FontSize="Medium"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

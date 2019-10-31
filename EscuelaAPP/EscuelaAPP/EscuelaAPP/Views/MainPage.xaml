@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:views="clr-namespace:EscuelaAPP.Views"
+            x:Class="EscuelaAPP.Views.MainPage"
+            xmlns:converters="clr-namespace:EscuelaAPP.XAML.Converters"
+            Title="Notas"
+             >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar" Command="{Binding AgregarCommand}"/>
+    </ContentPage.ToolbarItems>
+
+
+    <ListView x:Name="ItemsListView" 
+                ItemsSource="{Binding lnotas}"
+                Header="{Binding }"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding CargarDatosCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                SelectedItem="{Binding notaSelected}"
+                Margin="10"
+              ItemSelected="ItemsListView_ItemSelected"
+                >
+        <ListView.HeaderTemplate>
+            <DataTemplate>
+                <ContentView>
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--<Frame Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="LightBlue" HasShadow="True"/>-->
+                            <Label Grid.Column="0" Text="Promedio" 
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               FontSize="Large"/>
+                            <Label Grid.Column="1" Text="Estado" 
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               FontSize="Large"/>
+
+                            <Label Grid.Column="2" Text="Notas" 
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               FontSize="Large"/>
+                        </Grid>
+                        <BoxView HeightRequest="2" BackgroundColor="Black"/>
+
+                    </StackLayout>
+                </ContentView>
+            </DataTemplate>
+        </ListView.HeaderTemplate>
+        
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <!--BackgroundColor="{Binding estado,ConverterParameter=, Converter=converters.estadoToColorConverter}"-->
+                    <Grid Margin="0,5" BackgroundColor="{Binding color}" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <!--<Frame Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="LightGray" HasShadow="True"/>-->
+                        <Label Grid.Column="0" Text="{Binding nota.promedio,StringFormat='{0:N2}'}" Margin="10,0" VerticalOptions="Center" FontAttributes="Bold"
+                               TextColor="Black"/>
+
+                        <Label Grid.Column="1" Text="{Binding nota.estado}" VerticalOptions="Center"  FontAttributes="Bold"
+                               TextColor="Black"/>
+                        <StackLayout Grid.Column="2">
+                            <Label Text="{Binding nota.nota1,StringFormat='Nota 1:     {0:N2}'}"/>
+                            <Label Text="{Binding nota.nota2,StringFormat='Nota 2:     {0:N2}'}"/>
+                            <Label Text="{Binding nota.nota3,StringFormat='Nota 3:     {0:N2}'}"/>
+                        </StackLayout>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>
